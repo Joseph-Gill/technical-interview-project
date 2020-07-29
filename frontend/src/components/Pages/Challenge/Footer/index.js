@@ -33,7 +33,7 @@ const FooterSectionLeft = styled.div`
 `;
 
 const PrevNextButton = styled(BlueButton)`
-  width: 150px
+  width: 150px;
 `;
 const PrevNextButtonDisabled = styled(BlueButton)`
   cursor: not-allowed;

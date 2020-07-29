@@ -22,7 +22,6 @@ const HintButton = styled.button`
   color: #767676;
   border: none;
   background: none;
-  width: 100px;
   p {
     display: inline;
     padding-left: 8px;
