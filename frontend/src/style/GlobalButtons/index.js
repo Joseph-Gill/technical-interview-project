@@ -51,14 +51,8 @@ export const RoundGreyButton = styled.button`
     color: #363636;
   }
   cursor: pointer;
-  //color: black;
-  //cursor: pointer;
-  //border: 1px solid black;
-  //:hover {
-  //  background-color: #bdbdbd;
-  //}
 `;
-//#dbdbdb
+
 export const StartButton = styled.button`
   width: ${rem("230px")};
   height: ${rem("80.01px")};

@@ -1,20 +1,21 @@
-import React, {useState} from "react";
-import {rem} from "polished";
+import React, { useState } from "react";
+import { rem } from "polished";
 import styled from "styled-components";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    BaseButton,
-    BlueButton,
-    RedButton,
-    RoundGreyButton,
+  BaseButton,
+  BlueButton,
+  RedButton,
+  RoundGreyButton,
 } from "../../../../../style/GlobalButtons";
-import {Styledh2} from "../../../../../style/GlobalTitles";
-import {Controlled as CodeMirror} from "react-codemirror2";
+import { Styledh2 } from "../../../../../style/GlobalTitles";
+import { Controlled as CodeMirror } from "react-codemirror2";
 import ReactTooltip from "react-tooltip";
 import GenericDeleteModal from "../../../Modals/GenericDeleteModal/GenericDeleteModal";
-import {GenericSpinnerSmallBtn} from "../../../GenericSpinner";
-import {useDispatch} from "react-redux";
-import {getTestCode} from "../../../../../store/actions/testActions";
+import { GenericSpinnerSmallBtn } from "../../../GenericSpinner";
+import { useDispatch } from "react-redux";
+import { getTestCode } from "../../../../../store/actions/testActions";
+import { compose } from "redux";
 
 //////////
 // STYLES
@@ -130,6 +131,7 @@ const ReviewInfoContainerRight = styled.div`
 `;
 
 const QuestionSelectorButton = styled(BaseButton)`
+  //display: ${(props) => (props.isActive ? "flex" : "flex")};
   text-align: left;
   height: ${rem("38px")};
   width: 100%;
@@ -145,7 +147,6 @@ const QuestionSelectorButton = styled(BaseButton)`
 `;
 
 const StyledSmallCodeMirror = styled(CodeMirror)`
-
   * {
     font-size: 18px;
     font-family: "Courier New", Courier, monospace !important;
@@ -162,153 +163,157 @@ const StyledSmallCodeMirror = styled(CodeMirror)`
 //////////
 
 const GenericChallengeCardManageBig = ({
-                                           challenge,
-                                           reviewChallengeHandler,
-                                           ModalDeleteOpenCloseHandler,
-                                           isModalDeleteOpen,
-                                           resendResultEmail,
-                                           resultStatus,
-                                           resendInvitationEmail,
-                                           inviteStatus,
-                                       }) => {
-    // Conditionally change the background colors of the cards based on Status
-    const renderBackground = () => {
-        if (challenge.status === "PASSED") {
-            return {
-                backgroundColor: "green",
-            };
-        }
-        if (challenge.status === "FAILED") {
-            return {
-                backgroundColor: "#ef485c",
-            };
-        }
-        if (challenge.status === "NEEDS REVIEW") {
-            return {
-                background: "#E6D317",
-            };
-        }
-        return {
-            background: "#00bae5",
-        };
-    };
-
-    const dispatch = useDispatch();
-
-    const [codeDisplay, setCodeDisplay] = useState('');
-
-    const onGetCode = async (e, question_id) => {
-      e.preventDefault();
-      const challengeData = {
-        question_id: question_id,
-        candidate_id: challenge.candidate.id,
-        first_name: challenge.candidate.first_name,
-        last_name: challenge.candidate.last_name,
+  challenge,
+  reviewChallengeHandler,
+  ModalDeleteOpenCloseHandler,
+  isModalDeleteOpen,
+  resendResultEmail,
+  resultStatus,
+  resendInvitationEmail,
+  inviteStatus,
+}) => {
+  // Conditionally change the background colors of the cards based on Status
+  const renderBackground = () => {
+    if (challenge.status === "PASSED") {
+      return {
+        backgroundColor: "green",
       };
-      const response = await dispatch(getTestCode(challengeData))
-      if (response.status === 200) {
-        setCodeDisplay(response.data)
-      }
+    }
+    if (challenge.status === "FAILED") {
+      return {
+        backgroundColor: "#ef485c",
+      };
+    }
+    if (challenge.status === "NEEDS REVIEW") {
+      return {
+        background: "#E6D317",
+      };
+    }
+    return {
+      background: "#00bae5",
     };
+  };
 
-    return (
-        <ChallengeCardBig>
+  const dispatch = useDispatch();
+
+  const [codeDisplay, setCodeDisplay] = useState("");
+
+  const onGetCode = async (e, question_id) => {
+    e.preventDefault();
+    const challengeData = {
+      question_id: question_id,
+      candidate_id: challenge.candidate.id,
+      first_name: challenge.candidate.first_name,
+      last_name: challenge.candidate.last_name,
+    };
+    const response = await dispatch(getTestCode(challengeData));
+    if (response.status === 200) {
+      setCodeDisplay(response.data);
+    }
+  };
+
+  return (
+    <ChallengeCardBig>
+      <div>
+        <div>
+          <Challengeh2>{`Full Stack - Challenge #${challenge.id}`}</Challengeh2>
+        </div>
+        <ChallengeRightContainer>
+          <ChallengeInfoAmple>
+            <AmpleLight style={renderBackground()}></AmpleLight>
             <div>
-                <div>
-                    <Challengeh2>{`Full Stack - Challenge #${challenge.id}`}</Challengeh2>
-                </div>
-                <ChallengeRightContainer>
-                    <ChallengeInfoAmple>
-                        <AmpleLight style={renderBackground()}></AmpleLight>
-                        <div>
-                            <p>
-                                Candidate:{" "}
-                                {`${challenge.candidate.first_name} ${challenge.candidate.last_name}`}
-                            </p>
-                            <p>Status: {challenge.status}</p>
-                        </div>
-                    </ChallengeInfoAmple>
-                    <ChallengeInfo>
-                        <p>Created: {challenge.created.slice(0, 10)}</p>
-                        <p>
-                            Created by:{" "}
-                            {`${challenge.creator.first_name} ${challenge.creator.last_name}`}
-                        </p>
-                    </ChallengeInfo>
-                    <div>
-                        <DeleteButton
-                            onClick={ModalDeleteOpenCloseHandler}
-                            data-tip="Delete Challenge"
-                        >
-                            <FontAwesomeIcon icon={["far", "trash-alt"]}/>
-                            <ReactTooltip place="top" type="dark" effect="solid"/>
-                        </DeleteButton>
-                        {isModalDeleteOpen ? (
-                            <GenericDeleteModal
-                                ModalDeleteOpenCloseHandler={ModalDeleteOpenCloseHandler}
-                                type="challenges"
-                                typeId={challenge.id}
-                                from="managechallenges"
-                            >
-                                <p>{`Are you sure you want to delete the Challenge #${challenge.id}`}</p>
-                            </GenericDeleteModal>
-                        ) : null}
-                        {challenge.status === "PASSED" ||
-                        challenge.status === "FAILED" ||
-                        challenge.status === "NEEDS REVIEW" ? (
-                            <SendButton
-                                data-tip="Resend Challenge Score Email"
-                                onClick={resendResultEmail}
-                            >
-                                {resultStatus ? (
-                                    <GenericSpinnerSmallBtn/>
-                                ) : (
-                                    <FontAwesomeIcon icon={["fas", "trophy"]}/>
-                                )}
-                                <ReactTooltip place="top" type="dark" effect="solid"/>
-                            </SendButton>
-                        ) : (
-                            <SendButton
-                                data-tip="Resend Challenge Invitation Email"
-                                onClick={resendInvitationEmail}
-                            >
-                                {inviteStatus ? (
-                                    <GenericSpinnerSmallBtn/>
-                                ) : (
-                                    <FontAwesomeIcon icon={["fas", "envelope-open-text"]}/>
-                                )}
-                                <ReactTooltip place="top" type="dark" effect="solid"/>
-                            </SendButton>
-                        )}
-                        <RoundGreyButton onClick={reviewChallengeHandler}>
-                            <p>X</p>
-                        </RoundGreyButton>
-                    </div>
-                </ChallengeRightContainer>
+              <p>
+                Candidate:{" "}
+                {`${challenge.candidate.first_name} ${challenge.candidate.last_name}`}
+              </p>
+              <p>Status: {challenge.status}</p>
             </div>
-            <ReviewInfoContainer>
-                <ReviewInfoContainerLeft>
-                    {challenge.questions.map(question => {
-                        return (<QuestionSelectorButton key={`question ${question.id}`} onClick={(e) => onGetCode(e, question.id)}>
-                            {question.name}
-                        </QuestionSelectorButton>)
-                    })}
-                </ReviewInfoContainerLeft>
-                <ReviewInfoContainerRight>
-                    <StyledSmallCodeMirror
-                        value={codeDisplay}
-                        options={{
-                            mode: "javascript",
-                            theme: "material",
-                            lineNumbers: true,
-                        }}
-                        onChange={(editor, data, value) => {
-                        }}
-                    />
-                </ReviewInfoContainerRight>
-            </ReviewInfoContainer>
-        </ChallengeCardBig>
-    );
+          </ChallengeInfoAmple>
+          <ChallengeInfo>
+            <p>Created: {challenge.created.slice(0, 10)}</p>
+            <p>
+              Created by:{" "}
+              {`${challenge.creator.first_name} ${challenge.creator.last_name}`}
+            </p>
+          </ChallengeInfo>
+          <div>
+            <DeleteButton
+              onClick={ModalDeleteOpenCloseHandler}
+              data-tip="Delete Challenge"
+            >
+              <FontAwesomeIcon icon={["far", "trash-alt"]} />
+              <ReactTooltip place="top" type="dark" effect="solid" />
+            </DeleteButton>
+            {isModalDeleteOpen ? (
+              <GenericDeleteModal
+                ModalDeleteOpenCloseHandler={ModalDeleteOpenCloseHandler}
+                type="challenges"
+                typeId={challenge.id}
+                from="managechallenges"
+              >
+                <p>{`Are you sure you want to delete the Challenge #${challenge.id}`}</p>
+              </GenericDeleteModal>
+            ) : null}
+            {challenge.status === "PASSED" ||
+            challenge.status === "FAILED" ||
+            challenge.status === "NEEDS REVIEW" ? (
+              <SendButton
+                data-tip="Resend Challenge Score Email"
+                onClick={resendResultEmail}
+              >
+                {resultStatus ? (
+                  <GenericSpinnerSmallBtn />
+                ) : (
+                  <FontAwesomeIcon icon={["fas", "trophy"]} />
+                )}
+                <ReactTooltip place="top" type="dark" effect="solid" />
+              </SendButton>
+            ) : (
+              <SendButton
+                data-tip="Resend Challenge Invitation Email"
+                onClick={resendInvitationEmail}
+              >
+                {inviteStatus ? (
+                  <GenericSpinnerSmallBtn />
+                ) : (
+                  <FontAwesomeIcon icon={["fas", "envelope-open-text"]} />
+                )}
+                <ReactTooltip place="top" type="dark" effect="solid" />
+              </SendButton>
+            )}
+            <RoundGreyButton onClick={reviewChallengeHandler}>
+              <p>X</p>
+            </RoundGreyButton>
+          </div>
+        </ChallengeRightContainer>
+      </div>
+      <ReviewInfoContainer>
+        <ReviewInfoContainerLeft>
+          {challenge.questions.map((question) => {
+            return (
+              <QuestionSelectorButton
+                key={`question ${question.id}`}
+                onClick={(e) => onGetCode(e, question.id)}
+              >
+                {question.name}
+              </QuestionSelectorButton>
+            );
+          })}
+        </ReviewInfoContainerLeft>
+        <ReviewInfoContainerRight>
+          <StyledSmallCodeMirror
+            value={codeDisplay}
+            options={{
+              mode: "javascript",
+              theme: "material",
+              lineNumbers: true,
+            }}
+            onChange={(editor, data, value) => {}}
+          />
+        </ReviewInfoContainerRight>
+      </ReviewInfoContainer>
+    </ChallengeCardBig>
+  );
 };
 
 export default GenericChallengeCardManageBig;

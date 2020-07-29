@@ -30,7 +30,7 @@ const UserCard = styled.div`
   box-sizing: border-box;
   border-radius: 5px;
   padding: 16px;
-  height: ${rem("140px")};
+  height: ${rem("100px")};
   margin-bottom: 8px;
   overflow: hidden;
   > div:first-child {
@@ -49,8 +49,8 @@ const UserInfo = styled.div`
 `;
 
 const UserAvatar = styled.div`
-  width: ${rem("100px")};
-  height: ${rem("100px")};
+  width: ${rem("72px")};
+  height: ${rem("72px")};
   border: solid 1px rgba(221, 221, 221, 0.67);
   border-radius: 100%;
   display: flex;
@@ -58,8 +58,8 @@ const UserAvatar = styled.div`
   align-items: center;
   overflow: hidden;
   img {
-    width: ${rem("100px")};
-    height: ${rem("100px")};
+    width: ${rem("72px")};
+    height: ${rem("72px")};
   }
 `;
 
