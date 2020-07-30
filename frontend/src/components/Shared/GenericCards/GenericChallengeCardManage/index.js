@@ -116,13 +116,11 @@ const RoundGreyButtonSmart = styled(RoundGreyButton)`
 
 const GenericChallengeCardManage = ({ challenge }) => {
   const dispatch = useDispatch();
-
   //open close challenge
   const [isChallengeReviewing, setChallengeReviewing] = useState(false);
   const reviewChallengeHandler = () => {
     setChallengeReviewing(!isChallengeReviewing);
   };
-
   // Used to toggle the delete Challenge Card modal
   const [isModalDeleteOpen, setModalDeleteOpen] = useState(false);
   const ModalDeleteOpenCloseHandler = () => {
@@ -145,7 +143,6 @@ const GenericChallengeCardManage = ({ challenge }) => {
     await dispatch(resendChallengeResultAction(challenge.id));
     setResultStatus(false);
   };
-
   // Conditionally change the background colors of the cards based on Status
   const renderBackground = () => {
     if (challenge.status === "PASSED") {
@@ -188,7 +185,7 @@ const GenericChallengeCardManage = ({ challenge }) => {
           </div>
           <ChallengeRightContainer>
             <ChallengeInfoAmple>
-              <AmpleLight style={renderBackground()}></AmpleLight>
+              <AmpleLight style={renderBackground()}/>
               <div>
                 <p>
                   Candidate:{" "}
