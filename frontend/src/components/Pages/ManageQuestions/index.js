@@ -53,6 +53,9 @@ const EditContainer = styled(BaseContainer)`
 
 const BrowseContainer = styled(BaseContainer)`
   margin: 12px;
+  @media (min-width: 1234px) {
+    margin: 12px -12px 12px 12px;
+  }
   flex-grow: 1;
   flex-basis: 0;
   min-width: 540px;
