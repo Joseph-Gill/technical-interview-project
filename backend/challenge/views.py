@@ -25,9 +25,9 @@ class CreateChallenge(CreateAPIView):
         challenge = Challenge(creator=request.user, candidate=candidate)
         challenge.status = 'SENT'
         challenge.save()
-        easy_questions = random.sample(list(Question.objects.filter(difficulty='E')), 3)
-        intermediate_questions = random.sample(list(Question.objects.filter(difficulty='I')), 2)
-        hard_questions = random.sample(list(Question.objects.filter(difficulty='H')), 1)
+        easy_questions = random.sample(list(Question.objects.filter(difficulty='1')), 3)
+        intermediate_questions = random.sample(list(Question.objects.filter(difficulty='2')), 2)
+        hard_questions = random.sample(list(Question.objects.filter(difficulty='3')), 1)
         challenge.questions.set(easy_questions + intermediate_questions + hard_questions)
         email = EmailMultiAlternatives()
         email.subject = 'Propulsion Academy - You have a new Challenge!'

@@ -269,9 +269,9 @@ const Challenge = ({
         setScore({
           ...score,
           [progressValue]:
-            targetChallenge.questions[progressValue].difficulty === "E"
+            targetChallenge.questions[progressValue].difficulty === "1"
               ? 3
-              : targetChallenge.questions[progressValue].difficulty === "I"
+              : targetChallenge.questions[progressValue].difficulty === "2"
               ? 5
               : 8,
         });
@@ -300,7 +300,7 @@ const Challenge = ({
     targetChallenge.questions.forEach(
       (question) =>
         (perfectScore +=
-          question.difficulty === "E" ? 3 : question.difficulty === "I" ? 5 : 8)
+          question.difficulty === "1" ? 3 : question.difficulty === "2" ? 5 : 8)
     );
     return perfectScore;
   };

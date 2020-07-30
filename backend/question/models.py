@@ -6,9 +6,9 @@ from program.models import Program
 
 class Question(models.Model):
     DIFFICULTY = [
-        ('E', 'Easy'),
-        ('I', 'Intermediate'),
-        ('H', 'Hard')
+        ('1', 'Easy'),
+        ('2', 'Intermediate'),
+        ('3', 'Hard')
     ]
 
     name = models.CharField(

@@ -72,7 +72,7 @@ const GenericDeleteModal = ({
           setQuestionData({
             name: "",
             instructions: "",
-            difficulty: "E",
+            difficulty: "1",
             program: [],
             tests_for_question: ["", "", ""],
           });

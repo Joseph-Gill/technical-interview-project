@@ -157,9 +157,9 @@ const AddQuestion = ({
             placeholder="0"
             required
             value={
-              questionData.difficulty === "H"
+              questionData.difficulty === "3"
                 ? "8"
-                : questionData.difficulty === "I"
+                : questionData.difficulty === "2"
                 ? "5"
                 : "3"
             }
@@ -175,9 +175,9 @@ const AddQuestion = ({
             value={questionData.difficulty}
             onChange={handleTextInput}
           >
-            <option value="E">Easy</option>
-            <option value="I">Intermediate</option>
-            <option value="H">Hard</option>
+            <option value="1">Easy</option>
+            <option value="2">Intermediate</option>
+            <option value="3">Hard</option>
           </DifficultyDropdown>
           <Error />
         </InputLabelDiv>

@@ -9,7 +9,7 @@ class CreateQuestion(CreateAPIView):
     """
     post:
     Creates and returns a new Question.
-    The difficulty option are: 'E' for Easy, 'I' for Intermediate and 'H' for Hard
+    The difficulty option are: '1' for Easy, '2' for Intermediate and '3' for Hard
     The points values will be automatically define depending on the difficulty level of the question
     """
     serializer_class = CreateQuestionSerializer
