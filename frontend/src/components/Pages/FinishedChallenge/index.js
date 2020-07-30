@@ -6,6 +6,7 @@ import {
   BaseContainer,
   PageContainer,
 } from "../../../style/GlobalWrappers/index";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //////////
 // STYLE
@@ -28,12 +29,12 @@ const InformationContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100%;
-  min-width: 800px;
+  min-width: 200px;
 `;
 
 const ExampleImage = styled.div`
   min-height: ${rem("535px")};
-  min-width: ${rem("320px")};
+  min-width: ${rem("620px")};
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url("https://thumbs.gfycat.com/ClassicImaginaryFalcon-size_restricted.gif");
@@ -51,7 +52,7 @@ const LeftSideContainer = styled.div`
   flex-grow: 1;
   flex-basis: 0;
   height: ${rem("535px")};
-  min-width: 320px;
+  min-width: 920px;
   height: 100%;
   justify-content: space-between;
   display: flex;
@@ -62,7 +63,14 @@ const LeftSideContainer = styled.div`
 
 const ChallengeDone = styled.div`
   width: 100%;
+  height: 100%;
   text-justify: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  div:first-child p {
+    font-size: 20px;
+  }
 `;
 
 const RightSideContainer = styled.div`
@@ -73,6 +81,26 @@ const RightSideContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+`;
+
+const Instructionh1 = styled(Styledh1)`
+  padding-top: 0px;
+  font-size: ${rem("40px")};
+`;
+
+const Pcode = styled.p`
+  font-size: 36px;
+  font-family: "Courier New", Courier, monospace !important;
+`;
+
+const FontAwesomeIconWrapper = styled.div`
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  font-size: 122px;
 `;
 
 //////////
@@ -91,15 +119,19 @@ const FinishedChallenge = () => {
           <RightSideContainer>
             <ChallengeDone>
               <div>
-                <H2>Thanks for submitting your challenge!</H2>
+                <Instructionh1>
+                  Thanks for submitting your challenge!
+                </Instructionh1>
                 <br />
-                <P>
+                <p>
                   You will receive an email in your mailbox with information
                   about the challenge results.
-                </P>
-                <br />
-                <P>Keep coding!</P>
+                </p>
               </div>
+              <FontAwesomeIconWrapper>
+                <FontAwesomeIcon icon={["far", "paper-plane"]} />
+                <Pcode>{"{Keep coding!}"}</Pcode>
+              </FontAwesomeIconWrapper>
             </ChallengeDone>
           </RightSideContainer>
         </ChallengeDoneContainer>
