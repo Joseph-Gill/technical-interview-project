@@ -6,7 +6,6 @@ from subprocess import Popen, PIPE
 # ----- Functions used by all Tests run in tests/views.py to execute Tape tests ----
 
 # Looks for and creates if necessary a directory with the candidates id, first, and last name
-# num word must be the word representation of the question number being tested against
 def make_directory(num, user_id, first_name, last_name):
     candidate_directory = os.path.join(f'tests/question_{num}/user_{user_id}_{first_name}_{last_name}')
     if not os.path.exists(candidate_directory):
@@ -14,7 +13,6 @@ def make_directory(num, user_id, first_name, last_name):
 
 
 # Creates a file in the directory from the previous function to store candidates code to test
-# num word must be the word representation of the question number being tested against
 def open_test_file(num, user_id, first_name, last_name):
     return open(f'tests/question_{num}/user_{user_id}_{first_name}_{last_name}/question_{num}_tester.test.js',
                 'w')
@@ -36,7 +34,6 @@ def write_test_file(file, code_to_test, tape_one, tape_two, tape_three):
 
 
 # Runs the npm script in backend/package.json, $RESULT and $TEST are used here to pass locations of the test / results
-# num word must be the word representation of the question number being tested against
 def run_the_test_code(num, user_id, first_name, last_name):
     result = f'tests/question_{num}/user_{user_id}_{first_name}_{last_name}/question_{num}_test_results.json'
     test = f'tests/question_{num}/user_{user_id}_{first_name}_{last_name}/question_{num}_tester.test.js'
@@ -46,13 +43,13 @@ def run_the_test_code(num, user_id, first_name, last_name):
 
 
 # Reads the results of the Tape test piped through Tap Json and output to the file in candidates directory
-# num word must be the word representation of the question number being tested against
 def read_the_test_result(num, user_id, first_name, last_name):
     with open(
             f'tests/question_{num}/user_{user_id}_{first_name}_{last_name}/question_{num}_test_results.json') as f:
         return json.loads(f.read())
 
 
+# Reads and returns the code written by the candidate, after removing the import and test information from the file
 def read_the_candidate_code(num, candidate_id, first_name, last_name):
     with open(
             f'tests/question_{num}/user_{candidate_id}_{first_name}_{last_name}/question_{num}_tester.test.js') as f:

@@ -54,9 +54,9 @@ const GenericQuestionCard = ({ question, setData }) => {
     <QuestionCard>
       <div>
         <SmallText>
-          {question.difficulty === "I"
+          {question.difficulty === "2"
             ? "Intermediate"
-            : question.difficulty === "H"
+            : question.difficulty === "3"
             ? "Hard"
             : "Easy"}
         </SmallText>

@@ -6,7 +6,10 @@ from tests.tape_tests import *
 
 
 class GetCandidateCodeView(GenericAPIView):
-
+    """
+    post:
+    Retrieves the code written by a candidate for a specified question
+    """
     def post(self, request):
         num = request.data['question_id']
         first_name = request.data['first_name']
@@ -20,6 +23,10 @@ class GetCandidateCodeView(GenericAPIView):
 
 
 class RunTestOne(GenericAPIView):
+    """
+    post:
+    Runs test for "Sum of Two Numbers" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_one_tapes["one"]
     tape_two = question_one_tapes["two"]
@@ -42,6 +49,10 @@ class RunTestOne(GenericAPIView):
 
 
 class RunTestTwo(GenericAPIView):
+    """
+    post:
+    Runs test for "Reverse a String" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_two_tapes["one"]
     tape_two = question_two_tapes["two"]
@@ -64,6 +75,10 @@ class RunTestTwo(GenericAPIView):
 
 
 class RunTestThree(GenericAPIView):
+    """
+    post:
+    Runs test for "First Element of an Array" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_three_tapes["one"]
     tape_two = question_three_tapes["two"]
@@ -86,6 +101,10 @@ class RunTestThree(GenericAPIView):
 
 
 class RunTestFour(GenericAPIView):
+    """
+    post:
+    Runs test for "Less Than or Equal to Zero" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_four_tapes["one"]
     tape_two = question_four_tapes["two"]
@@ -108,6 +127,10 @@ class RunTestFour(GenericAPIView):
 
 
 class RunTestFive(GenericAPIView):
+    """
+    post:
+    Runs test for "Next Number" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_five_tapes["one"]
     tape_two = question_five_tapes["two"]
@@ -130,6 +153,10 @@ class RunTestFive(GenericAPIView):
 
 
 class RunTestSix(GenericAPIView):
+    """
+    post:
+    Runs test for "Add Up to a Number" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_six_tapes["one"]
     tape_two = question_six_tapes["two"]
@@ -152,6 +179,10 @@ class RunTestSix(GenericAPIView):
 
 
 class RunTestSeven(GenericAPIView):
+    """
+    post:
+    Runs test for "Count the Vowels" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_seven_tapes["one"]
     tape_two = question_seven_tapes["two"]
@@ -174,6 +205,10 @@ class RunTestSeven(GenericAPIView):
 
 
 class RunTestEight(GenericAPIView):
+    """
+    post:
+    Runs test for "Min Max Number" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_eight_tapes["one"]
     tape_two = question_eight_tapes["two"]
@@ -196,6 +231,10 @@ class RunTestEight(GenericAPIView):
 
 
 class RunTestNine(GenericAPIView):
+    """
+    post:
+    Runs test for "Count the Characters" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_nine_tapes["one"]
     tape_two = question_nine_tapes["two"]
@@ -218,6 +257,10 @@ class RunTestNine(GenericAPIView):
 
 
 class RunTestTen(GenericAPIView):
+    """
+    post:
+    Runs test for "Multiply All the Numbers" Question
+    """
     permission_classes = [IsAuthenticated]
     tape_one = question_ten_tapes["one"]
     tape_two = question_ten_tapes["two"]

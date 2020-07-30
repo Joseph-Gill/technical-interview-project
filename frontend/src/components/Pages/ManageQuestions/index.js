@@ -132,7 +132,7 @@ const Questions = ({
     name: "",
     instructions: "",
     program: [],
-    difficulty: "E",
+    difficulty: "1",
     tests_for_question: ["", "", ""],
   });
   const handleTextInput = (e) => {
@@ -192,7 +192,7 @@ const Questions = ({
       setQuestionData({
         name: "",
         instructions: "",
-        difficulty: "E",
+        difficulty: "1",
         program: [],
         tests_for_question: ["", "", ""],
       });
@@ -205,7 +205,7 @@ const Questions = ({
     setQuestionData({
       name: "",
       instructions: "",
-      difficulty: "E",
+      difficulty: "1",
       program: [],
       tests_for_question: ["", "", ""],
     });
@@ -217,7 +217,7 @@ const Questions = ({
     setQuestionData({
       name: "",
       instructions: "",
-      difficulty: "E",
+      difficulty: "1",
       program: [],
       tests_for_question: ["", "", ""],
     });
@@ -243,7 +243,7 @@ const Questions = ({
       setQuestionData({
         name: "",
         instructions: "",
-        difficulty: "E",
+        difficulty: "1",
         program: [],
         tests_for_question: ["", "", ""],
       });

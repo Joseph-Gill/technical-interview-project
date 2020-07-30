@@ -86,7 +86,7 @@ const ChallengesList = styled.div`
 
 const ManageChallenges = ({ getAllChallengesAction, allChallenges }) => {
   // Used to handle sort by name, status, date created
-  const [sort, setSort] = useState("last_name");
+  const [sort, setSort] = useState("date");
   const [search, setSearch] = useState("");
   const inputHandler = (e, func) => {
     func(e.currentTarget.value);
@@ -143,9 +143,9 @@ const ManageChallenges = ({ getAllChallengesAction, allChallenges }) => {
                 value={sort}
                 onChange={(e) => inputHandler(e, setSort)}
               >
+                <option value="date">Date Updated</option>
                 <option value="status">Status</option>
                 <option value="last_name">Candidate Name</option>
-                <option value="date">Date Updated</option>
               </SortCDropdown>
               <SearchCInput
                 type="text"
